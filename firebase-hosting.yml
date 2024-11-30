@@ -1,0 +1,22 @@
+name: Firebase Hosting Deploy
+
+on:
+  push:
+    branches:
+      - main  # أو الفرع الذي تستخدمه مثل master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Firebase CLI
+        uses: wzieba/Firebase-Action@v2
+        with:
+          firebase_service_account: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_AUTH_WEBSITE_7810B }}
+          project_id: "auth-website-7810b"
+
+      - name: Deploy to Firebase Hosting
+        run: firebase deploy --only hosting
